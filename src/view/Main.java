@@ -2,6 +2,7 @@ package view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -14,10 +15,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage){
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/MainLayout.fxml"));
-            AnchorPane ap = (AnchorPane)loader.load();
-            Scene scene = new Scene(ap,600,400);
+
+            Parent root = FXMLLoader.load(Main.class.getResource("/view/MainLayout.fxml"));
+            Scene scene = new Scene(root,600,400);
 
             stage.resizableProperty().setValue(false);
             stage.setScene(scene);
