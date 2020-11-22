@@ -10,10 +10,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import moneyoption.Coin;
 import moneyoption.PaperMoney;
-import stack.MyStack;
+import structure.MyStack;
 import util.AppUtil;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class MainController{

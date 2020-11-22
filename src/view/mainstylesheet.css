@@ -1,0 +1,32 @@
+#mainpane{
+    -fx-background-color: #F9A0CA;
+}
+
+.container{
+    -fx-background-color : #58FAF4;
+    -fx-background-radius : 5px;
+}
+
+.container Label {
+    -fx-text-fill: #610B21;
+}
+
+#title{
+    -fx-effect: dropshadow(gaussian,#B5B2FF,0,1,2,2);
+}
+
+.btn{
+    -fx-border-radius: 4px;
+    -fx-background-color: #00FF00;
+    -fx-text-fill: #FF0000;
+    -fx-border-color: #00FF00;
+}
+
+.btn:pressed{
+    -fx-border-radius: 4px;
+    -fx-background-color:  #FF0000;
+    -fx-text-fill: #00FF00;
+    -fx-border-color: #FF0000;
+}
+
+
