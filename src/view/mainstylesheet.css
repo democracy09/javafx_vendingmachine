@@ -1,5 +1,7 @@
 #mainpane{
-    -fx-background-color: #F9A0CA;
+    -fx-background-image: url("/view/rainbow.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
 }
 
 .container{

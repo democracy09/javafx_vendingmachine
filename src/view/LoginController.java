@@ -33,7 +33,7 @@ public class LoginController {
     private void initialize() {
         password = new String();
         try(FileReader fileReader = new FileReader("password.txt")){
-            char[] paw = new char[5];
+            char[] paw = new char[17];
             int i=0;
             while(i!=-1){
                 i=fileReader.read(paw);

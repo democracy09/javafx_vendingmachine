@@ -5,15 +5,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainpane" prefHeight="330.0" prefWidth="300.0" stylesheets="@mainstylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SetPwController">
+<AnchorPane fx:id="mainpane" prefHeight="330.0" prefWidth="400.0" stylesheets="@mainstylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SetPwController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
-      <Label layoutX="112.0" layoutY="74.0" text="이전 비밀번호" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <Label layoutX="148.0" layoutY="59.0" text="이전 비밀번호" />
+            <Label layoutX="156.0" layoutY="99.0" text="초기 : 1234" />
+            <Label layoutX="142.0" layoutY="161.0" text="새로운 비밀번호" />
+            <Button fx:id="confirmBtn" layoutX="162.0" layoutY="218.0" mnemonicParsing="false" onAction="#confirm" styleClass="btn" text="확인" />
+         </children>
+      </AnchorPane>
       <Button fx:id="undoBtn" layoutX="19.0" layoutY="24.0" mnemonicParsing="false" onAction="#before" styleClass="btn" text="이전으로" />
-      <TextField layoutX="69.0" layoutY="89.0" />
-      <Label layoutX="106.0" layoutY="173.0" text="새로운 비밀번호" />
-      <TextField layoutX="69.0" layoutY="189.0" />
-      <Button layoutX="130.0" layoutY="241.0" mnemonicParsing="false" styleClass="btn" text="확인" />
-      <Label layoutX="120.0" layoutY="111.0" text="초기 : 0000" />
+      <TextField fx:id="prePassword" layoutX="69.0" layoutY="89.0" prefHeight="22.0" prefWidth="258.0" />
+      <TextField fx:id="newPassword" layoutX="69.0" layoutY="189.0" prefHeight="22.0" prefWidth="258.0" />
    </children>
 </AnchorPane>
