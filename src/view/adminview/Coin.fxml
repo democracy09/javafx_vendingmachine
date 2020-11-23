@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainpane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../mainstylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.adminview.CoinController">
+    <children>
+        <AnchorPane fx:id="ap" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <children>
+                <Button fx:id="beforeBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#gotoPre" styleClass="btn" text="이전으로" AnchorPane.bottomAnchor="335.6" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                <VBox fx:id="mainmenu" layoutX="472.0" prefHeight="374.0" prefWidth="84.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Button fx:id="stockMenu" mnemonicParsing="false" onAction="#pressStock" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="재고관리" />
+                        <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="화폐현황" />
+                        <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="일별 매츨" />
+                    </children>
+                </VBox>
+            <Label layoutX="36.0" layoutY="64.0" text="10원">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" layoutY="119.0" text="50원">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="173.0" text="100원">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="225.0" text="500원">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="won10" layoutX="120.0" layoutY="71.0" text="Label" />
+            <Label fx:id="won50" layoutX="120.0" layoutY="126.0" text="Label" />
+            <Label fx:id="won100" layoutX="120.0" layoutY="180.0" text="Label" />
+            <Label fx:id="won500" layoutX="120.0" layoutY="232.0" text="Label" />
+            <Button layoutX="243.0" layoutY="89.0" mnemonicParsing="false" onAction="#collect" prefHeight="194.0" prefWidth="195.0" styleClass="btn" text="수금">
+               <font>
+                  <Font name="System Bold" size="49.0" />
+               </font>
+            </Button>
+            <Label layoutX="28.0" layoutY="269.0" text="1000원">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="won1000" layoutX="119.0" layoutY="276.0" text="Label" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

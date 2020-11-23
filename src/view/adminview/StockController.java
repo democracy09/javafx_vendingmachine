@@ -1,4 +1,4 @@
-package view;
+package view.adminview;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,15 +9,11 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import util.FileInOut;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 public class StockController {
 
     private int[] stock;
 
+    @FXML private Button coinMenu;
     @FXML private Button beforeBtn;
     @FXML private Label water;
     @FXML private Label coffee;
@@ -30,6 +26,17 @@ public class StockController {
             Parent adminLogin = FXMLLoader.load(getClass().getResource("/view/AdminLogin.fxml"));
             Scene scene = new Scene(adminLogin);
             Stage primaryStage = (Stage)beforeBtn.getScene().getWindow();
+            primaryStage.setScene(scene);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void pressCoin(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Coin.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage)coinMenu.getScene().getWindow();
             primaryStage.setScene(scene);
         }catch(Exception e){
             e.printStackTrace();

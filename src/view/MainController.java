@@ -49,14 +49,14 @@ public class MainController{
     private void initialize()
     {
         int[] stock = FileInOut.fromFile(13,5,"stock.txt");
-        int[] coinStock = FileInOut.fromFile(13, 4, "coin.txt");
+        int[] coinStock = FileInOut.fromFile(13, 5, "coin.txt");
         water = new Water(stock[0]);
         coffee = new Coffee(stock[1]);
         ionDrink = new IonDrink(stock[2]);
         fineCoffee = new FineCoffee(stock[3]);
         soda = new Soda(stock[4]);
         coin = new Coin();
-        paperMoney = new PaperMoney();
+        paperMoney = new PaperMoney(coinStock[4]);
         machineCoin = new Coin(coinStock[0],coinStock[1],coinStock[2],coinStock[3]);
         taskStack = new MyStack<Integer>();
 
@@ -83,8 +83,6 @@ public class MainController{
                 totalChange -= machineCoin.getWon500()*500;
             }else totalChange %= 500;
         }
-
-
         if(totalChange/100>0) {
             change100 = totalChange/100;
             if(change100>machineCoin.getWon100()) {
@@ -92,8 +90,6 @@ public class MainController{
                 totalChange -= machineCoin.getWon100()*100;
             }else totalChange %= 100;
         }
-
-
         if(totalChange/50>0) {
             change50 = totalChange/50;
             if(change50>machineCoin.getWon50()) {
@@ -101,7 +97,6 @@ public class MainController{
                 totalChange -= machineCoin.getWon50()*50;
             }else totalChange %= 50;
         }
-
         if(totalChange/10>0) {
             change10 = totalChange/10;
             if(change10>machineCoin.getWon10()) {
@@ -120,56 +115,61 @@ public class MainController{
             machineCoin.setWon500(machineCoin.getWon500()-change500);
             totalWon = totalChange;
             total.setText(totalWon+"원");
-            paperMoney.setWon1000(0);
         }
 
 
 
     }
 
-    public void undo(){
+    public void undo() {
         int undoWon;
-        try{
-            undoWon=taskStack.peek();
+        try {
+            undoWon = taskStack.peek();
 
-            if(undoWon==10&&coin.getWon10()>0){
-              coin.setWon10(coin.getWon10()-1);
-               machineCoin.setWon10(machineCoin.getWon10()-1);
-                totalWon-=10;
-                AppUtil.Alert("10원 취소",null);
+            if (undoWon == 10 && coin.getWon10() > 0) {
+                coin.setWon10(coin.getWon10() - 1);
+                machineCoin.setWon10(machineCoin.getWon10() - 1);
+                totalWon -= 10;
+                AppUtil.Alert("10원 취소", null);
                 taskStack.pop();
-            }else if(undoWon==50&&coin.getWon50()>0){
-               coin.setWon50(coin.getWon50()-1);
-               machineCoin.setWon50(machineCoin.Won50()-1);
-               totalWon-=50;
+            } else if (undoWon == 50 && coin.getWon50() > 0) {
+                coin.setWon50(coin.getWon50() - 1);
+                machineCoin.setWon50(machineCoin.Won50() - 1);
+                totalWon -= 50;
                 taskStack.pop();
-             AppUtil.Alert("50원 취소",null);
-            }else if(undoWon==100&&coin.getWon100()>0) {
-                coin.setWon100(coin.getWon100()-1);
-                machineCoin.setWon100(-1);
+                AppUtil.Alert("50원 취소", null);
+            } else if (undoWon == 100 && coin.getWon100() > 0) {
+                coin.setWon100(coin.getWon100() - 1);
+                machineCoin.setWon100(machineCoin.getWon100() - 1);
                 totalWon -= 100;
                 taskStack.pop();
-             AppUtil.Alert("100원 취소", null);
-            }else if(undoWon==500&&coin.getWon500()>0) {
-                coin.setWon500(-1);
-             machineCoin.setWon500(-1);
-              totalWon -= 500;
+                AppUtil.Alert("100원 취소", null);
+            } else if (undoWon == 500 && coin.getWon500() > 0) {
+                coin.setWon500(coin.getWon500() - 1);
+                machineCoin.setWon500(machineCoin.getWon500() - 1);
+                totalWon -= 500;
                 taskStack.pop();
-              AppUtil.Alert("500원 취소", null);
-            }else if(undoWon==1000&&paperMoney.getWon1000()>0) {
-                paperMoney.setWon1000(-1);
+                AppUtil.Alert("500원 취소", null);
+            } else if (undoWon == 1000) {
+                if(paperMoney.getWon1000() < 0) throw new UnableToUndoException();
+                paperMoney.setWon1000(paperMoney.getWon1000() - 1);
                 totalWon -= 1000;
                 taskStack.pop();
                 AppUtil.Alert("1000원 취소", null);
-            }else if(undoWon < 0){
-                AppUtil.Alert("취소 불가 : 음료 구매",null);
-        }}catch(NullPointerException e){
-            AppUtil.Alert("입력된 금액이 없습니다.",null);
+            } else if (undoWon < 0) {
+                AppUtil.Alert("취소 불가 : 음료 구매", null);
+            }
+        } catch (NullPointerException e) {
+            AppUtil.Alert("입력된 금액이 없습니다.", null);
+        }catch(UnableToUndoException e){
+            AppUtil.Alert("취소 불가 : 잔돈 반환됨", null);
         }finally{
             total.setText(totalWon+"원");
         }
 
     }
+
+    private class UnableToUndoException extends RuntimeException{}
 
     public void press10Won(){
         totalWon += coin.Won10();
@@ -180,7 +180,7 @@ public class MainController{
         }
         coin.setWon10(coin.getWon10()+1);
         taskStack.push(10);
-        machineCoin.setWon10(coin.getWon10()+1);
+        machineCoin.setWon10(machineCoin.getWon10()+1);
         total.setText(totalWon+"원");
     }
 
@@ -193,7 +193,7 @@ public class MainController{
             return;
         }
         coin.setWon50(coin.getWon50()+1);
-        machineCoin.setWon50(coin.getWon50()+1);
+        machineCoin.setWon50(machineCoin.getWon50()+1);
         taskStack.push(50);
         total.setText(totalWon+"원");
     }
@@ -206,7 +206,7 @@ public class MainController{
             return;
         }
         coin.setWon100(coin.getWon100()+1);
-        machineCoin.setWon100(coin.getWon100()+1);
+        machineCoin.setWon100(machineCoin.getWon100()+1);
         taskStack.push(100);
         total.setText(totalWon+"원");
     }
@@ -219,7 +219,7 @@ public class MainController{
             return;
         }
         coin.setWon500(coin.getWon500()+1);
-        machineCoin.setWon500(coin.getWon500()+1);
+        machineCoin.setWon500(machineCoin.getWon500()+1);
         taskStack.push(500);
         total.setText(totalWon+"원");
     }
@@ -227,7 +227,8 @@ public class MainController{
     public void press1000Won(){
         paperMoney.setWon1000(paperMoney.getWon1000()+1);
         totalWon += paperMoney.Won1000();
-        if(paperMoney.getWon1000()>3){
+        taskStack.printAll();
+        if(taskStack.search(1000)>=3){
             AppUtil.Alert("지폐를 3000원 초과하여 입력할 수 없습니다.", null);
             paperMoney.setWon1000(paperMoney.getWon1000()-1);
             totalWon -= 1000;
@@ -238,7 +239,7 @@ public class MainController{
             totalWon -= 1000;
             return;
         }
-        taskStack.push(1000);
+        taskStack.push(paperMoney.Won1000());
         total.setText(totalWon+"원");
     }
 
@@ -328,7 +329,6 @@ public class MainController{
     }
 
     public void adminLogin(){
-
         try(FileWriter fileWriter = new FileWriter("stock.txt")){
             String str = water.getQuantity()+"\n"+coffee.getQuantity()+"\n"+ionDrink.getQuantity()+"\n"+fineCoffee.getQuantity()+"\n"+soda.getQuantity();
             fileWriter.write(str);
@@ -338,7 +338,7 @@ public class MainController{
         }
 
         try(FileWriter fileWriter = new FileWriter("coin.txt")){
-            String str = machineCoin.getWon10()+"\n"+ machineCoin.getWon50()+"\n"+ machineCoin.getWon100()+"\n"+ machineCoin.getWon500();
+            String str = machineCoin.getWon10()+"\n"+ machineCoin.getWon50()+"\n"+ machineCoin.getWon100()+"\n"+ machineCoin.getWon500()+"\n"+ paperMoney.getWon1000();
             fileWriter.write(str);
             fileWriter.flush();
         } catch (IOException e) {

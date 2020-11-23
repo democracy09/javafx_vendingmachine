@@ -1,21 +1,18 @@
-package view;
+package view.adminview;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class AdminPageController {
 
 
     @FXML private Button beforeBtn;
     @FXML private Button stockMenu;
+    @FXML private Button coinMenu;
 
 
     public void gotoPre(){
@@ -31,7 +28,7 @@ public class AdminPageController {
 
     public void pressStock(){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/Stock.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Stock.fxml"));
             Scene scene = new Scene(root);
             Stage primaryStage = (Stage)stockMenu.getScene().getWindow();
             primaryStage.setScene(scene);
@@ -40,6 +37,16 @@ public class AdminPageController {
         }
     }
 
+    public void pressCoin(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Coin.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage)coinMenu.getScene().getWindow();
+            primaryStage.setScene(scene);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 }

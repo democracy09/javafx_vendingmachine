@@ -6,12 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import util.AppUtil;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -55,7 +52,7 @@ public class LoginController {
 
         if(userPw.equalsIgnoreCase(password)){
             try {
-                Parent adminPage = FXMLLoader.load(getClass().getResource("/view/AdminPage.fxml"));
+                Parent adminPage = FXMLLoader.load(getClass().getResource("/view/adminview/AdminPage.fxml"));
                 Scene scene = new Scene(adminPage);
                 Stage primaryStage = (Stage)loginBtn.getScene().getWindow();
                 primaryStage.setScene(scene);
