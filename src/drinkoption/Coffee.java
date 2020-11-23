@@ -2,9 +2,9 @@ package drinkoption;
 
 public class Coffee extends Drink {
 
-    public Coffee(){
+    public Coffee(int quantity){
         setPrice(500);
-        setQuantity(3);
+        setQuantity(quantity);
     }
 
 }

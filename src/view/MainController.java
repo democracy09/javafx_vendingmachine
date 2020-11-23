@@ -12,12 +12,13 @@ import moneyoption.Coin;
 import moneyoption.PaperMoney;
 import structure.MyStack;
 import util.AppUtil;
+import util.FileInOut;
 
-import java.io.IOException;
+import java.io.*;
 
 public class MainController{
 
-    private Water water;
+    private Water  water;
     private Coffee coffee;
     private IonDrink ionDrink;
     private Soda soda;
@@ -47,14 +48,16 @@ public class MainController{
     @FXML
     private void initialize()
     {
-        water = new Water();
-        ionDrink = new IonDrink();
-        soda = new Soda();
-        coffee = new Coffee();
-        fineCoffee = new FineCoffee();
+        int[] stock = FileInOut.fromFile(13,5,"stock.txt");
+        int[] coinStock = FileInOut.fromFile(13, 4, "coin.txt");
+        water = new Water(stock[0]);
+        coffee = new Coffee(stock[1]);
+        ionDrink = new IonDrink(stock[2]);
+        fineCoffee = new FineCoffee(stock[3]);
+        soda = new Soda(stock[4]);
         coin = new Coin();
         paperMoney = new PaperMoney();
-        machineCoin = new Coin(5,5,5,5);
+        machineCoin = new Coin(coinStock[0],coinStock[1],coinStock[2],coinStock[3]);
         taskStack = new MyStack<Integer>();
 
         waterLabel.setText(water.getQuantity()+"개");
@@ -111,6 +114,10 @@ public class MainController{
             AppUtil.Alert("잔돈이 모자랍니다",null);
         }else{
             AppUtil.Alert("500원 : "+change500+"개\n100원 : "+change100+"개\n50원 : "+change50+"개\n10원 : "+change10+"개",null);
+            machineCoin.setWon10(machineCoin.getWon10()-change10);
+            machineCoin.setWon50(machineCoin.getWon50()-change50);
+            machineCoin.setWon100(machineCoin.getWon100()-change100);
+            machineCoin.setWon500(machineCoin.getWon500()-change500);
             totalWon = totalChange;
             total.setText(totalWon+"원");
             paperMoney.setWon1000(0);
@@ -321,6 +328,23 @@ public class MainController{
     }
 
     public void adminLogin(){
+
+        try(FileWriter fileWriter = new FileWriter("stock.txt")){
+            String str = water.getQuantity()+"\n"+coffee.getQuantity()+"\n"+ionDrink.getQuantity()+"\n"+fineCoffee.getQuantity()+"\n"+soda.getQuantity();
+            fileWriter.write(str);
+            fileWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try(FileWriter fileWriter = new FileWriter("coin.txt")){
+            String str = machineCoin.getWon10()+"\n"+ machineCoin.getWon50()+"\n"+ machineCoin.getWon100()+"\n"+ machineCoin.getWon500();
+            fileWriter.write(str);
+            fileWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         try{
             Parent login = FXMLLoader.load(getClass().getResource("/view/AdminLogin.fxml"));
             Scene scene = new Scene(login);

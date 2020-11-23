@@ -2,9 +2,9 @@ package drinkoption;
 
 public class IonDrink extends Drink {
 
-    public IonDrink(){
+    public IonDrink(int quantity){
         setPrice(550);
-        setQuantity(3);
+        setQuantity(quantity);
     }
 
 }

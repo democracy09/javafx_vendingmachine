@@ -28,11 +28,11 @@
             <Button fx:id="sodaBtn" layoutX="145.0" layoutY="181.0" mnemonicParsing="false" onAction="#pressSoda" styleClass="btn" text="Soda" />
             <Label layoutX="21.0" layoutY="28.0" prefHeight="22.0" prefWidth="60.0" styleClass="container" text="음료 선택" AnchorPane.topAnchor="28.0" />
             <Button fx:id="fineBtn" layoutX="36.0" layoutY="181.0" mnemonicParsing="false" onAction="#pressFine" styleClass="btn" text="Fine Coffee" />
-            <Label fx:id="waterLabel" layoutX="57.0" layoutY="128.0" text="3개" />
-            <Label fx:id="coffeeLabel" layoutX="149.0" layoutY="128.0" text="3개" />
-            <Label fx:id="fineLabel" layoutX="58.0" layoutY="241.0" text="3개" />
-            <Label fx:id="sodaLabel" layoutX="157.0" layoutY="234.0" text="3개" />
-            <Label fx:id="ionLabel" layoutX="243.0" layoutY="128.0" text="3개" />
+            <Label fx:id="waterLabel" layoutX="57.0" layoutY="128.0" text="water" />
+            <Label fx:id="coffeeLabel" layoutX="149.0" layoutY="128.0" text="Coffee" />
+            <Label fx:id="fineLabel" layoutX="58.0" layoutY="241.0" text="Fine Coffee" />
+            <Label fx:id="sodaLabel" layoutX="157.0" layoutY="234.0" text="Soda" />
+            <Label fx:id="ionLabel" layoutX="243.0" layoutY="128.0" text="Ion Drink" />
             <Button fx:id="adminBtn" layoutX="236.0" layoutY="15.0" mnemonicParsing="false" onAction="#adminLogin" styleClass="btn" text="관리자 메뉴" AnchorPane.topAnchor="15.0" />
             <Button fx:id="exchangeBtn" layoutX="215.0" layoutY="248.0" mnemonicParsing="false" onAction="#exchange" prefHeight="57.0" prefWidth="102.0" styleClass="btn" text="거스름돈 반환" />
             <Label layoutX="51.0" layoutY="105.0" text="450원" />

@@ -31,4 +31,22 @@
     -fx-border-color: #FF0000;
 }
 
+#mainmenu{
+    -fx-background-color: #00FF00;
+    -fx-text-fill: #FF0000;
+    -fx-border-color: #00FF00;
+}
+
+.menubtn{
+    -fx-border-color: #FF0000;
+    -fx-border-width: 0 0 3 0;
+    -fx-background-color: #00FF00;
+    -fx-text-fill: #FF0000;
+}
+
+.menubtn:pressed{
+    -fx-background-color:  #FF0000;
+    -fx-text-fill: #00FF00;
+}
+
 

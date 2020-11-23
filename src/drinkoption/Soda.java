@@ -2,8 +2,8 @@ package drinkoption;
 
 public class Soda extends Drink{
 
-    public Soda(){
+    public Soda(int quantity){
         setPrice(750);
-        setQuantity(3);
+        setQuantity(quantity);
     }
 }

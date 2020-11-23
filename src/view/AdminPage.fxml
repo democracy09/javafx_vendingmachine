@@ -2,13 +2,20 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="mainpane" prefHeight="400.0" prefWidth="600.0" stylesheets="@mainstylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AdminPageController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <AnchorPane fx:id="ap" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <children>
             <Button fx:id="beforeBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#gotoPre" styleClass="btn" text="이전으로" AnchorPane.bottomAnchor="335.6" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+            <VBox fx:id="mainmenu" layoutX="472.0" prefHeight="374.0" prefWidth="84.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button fx:id="stockMenu" mnemonicParsing="false" onAction="#pressStock" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="재고관리" />
+                  <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="화폐현황" />
+                  <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="일별 매츨" />
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>
