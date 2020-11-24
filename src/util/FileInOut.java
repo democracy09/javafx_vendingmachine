@@ -1,24 +1,22 @@
 package util;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileInOut {
 
-    public static int[] fromFile(int fdata, int mdata, String name){
-        int[] arr = new int[mdata];
-        try(FileReader fis = new FileReader(name)){
-            char[] st = new char[fdata];
-            int i, j = 0;
-            while((i = fis.read(st))!=-1){}
-            for(int k = 0; k<13; k++){
-                if(st[k]=='\n'||st[k]=='\r'||st[k]==0){
-                    continue;
-                }
-                arr[j]=Integer.parseInt(String.valueOf(st[k]));
-                j++;
+    public static int[] fromFile(int size, String name){
+        int[] arr = new int[size];
+        try(FileReader fileReader = new FileReader(name)){
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            List<String> lineList = new ArrayList<String>();
+            while((line = bufferedReader.readLine())!=null){
+                lineList.add(line);
+            }
+            for(int i = 0; i<arr.length; i++){
+                arr[i]=Integer.parseInt(lineList.get(i));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

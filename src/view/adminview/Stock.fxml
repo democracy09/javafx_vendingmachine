@@ -15,7 +15,7 @@
                     <children>
                         <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="재고관리" />
                         <Button fx:id="coinMenu" mnemonicParsing="false" onAction="#pressCoin" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="화폐현황" />
-                        <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="일별 매츨" />
+                        <Button fx:id="salesMenu" mnemonicParsing="false" onAction="#pressSales" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="월별 매츨" />
                     </children>
                 </VBox>
                 <Label layoutX="80.0" layoutY="80.0" text="Water">

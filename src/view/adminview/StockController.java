@@ -15,6 +15,7 @@ public class StockController {
 
     @FXML private Button coinMenu;
     @FXML private Button beforeBtn;
+    @FXML private Button salesMenu;
     @FXML private Label water;
     @FXML private Label coffee;
     @FXML private Label ion;
@@ -43,10 +44,21 @@ public class StockController {
         }
     }
 
+    public void pressSales(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Sales.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage)salesMenu.getScene().getWindow();
+            primaryStage.setScene(scene);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void initialize()
     {
-        stock = FileInOut.fromFile(13,5,"stock.txt");
+        stock = FileInOut.fromFile(5,"stock.txt");
         water.setText(stock[0]+"개");
         coffee.setText(stock[1]+"개");
         ion.setText(stock[2]+"개");

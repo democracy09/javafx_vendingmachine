@@ -10,12 +10,15 @@ import javafx.stage.Stage;
 import util.AppUtil;
 import util.FileInOut;
 
+import java.io.File;
+
 public class CoinController {
 
     private int[] stock;
 
     @FXML private Button beforeBtn;
     @FXML private Button stockMenu;
+    @FXML private Button salesMenu;
     @FXML private Label won10;
     @FXML private Label won50;
     @FXML private Label won100;
@@ -44,8 +47,19 @@ public class CoinController {
         }
     }
 
+    public void pressSales(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Sales.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage)salesMenu.getScene().getWindow();
+            primaryStage.setScene(scene);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @FXML private void initialize(){
-        stock = FileInOut.fromFile(13,5,"coin.txt");
+        stock = FileInOut.fromFile(5,"coin.txt");
 
         won10.setText(stock[0]+"개");
         won50.setText(stock[1]+"개");
@@ -77,5 +91,9 @@ public class CoinController {
         int total = colCoin[0]*10+colCoin[1]*50+colCoin[2]*100+colCoin[3]*500+colCoin[4]*1000;
         AppUtil.Alert("10원: "+colCoin[0]+"개"+"\n"+"50원: "+colCoin[1]+"개"+"\n"+"100원: "+colCoin[2]+"개"+"\n"+"500원: "+colCoin[3]+"개"
                 +"\n1000원: "+ colCoin[4]+"개"+"\n\n총 "+total+"원",null);
+
+        int[] temp = FileInOut.fromFile(12,"sales.txt");
+        temp[0]+=total;
+        FileInOut.toFile("sales.txt",temp);
     }
 }

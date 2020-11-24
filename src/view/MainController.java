@@ -48,8 +48,8 @@ public class MainController{
     @FXML
     private void initialize()
     {
-        int[] stock = FileInOut.fromFile(13,5,"stock.txt");
-        int[] coinStock = FileInOut.fromFile(13, 5, "coin.txt");
+        int[] stock = FileInOut.fromFile(5,"stock.txt");
+        int[] coinStock = FileInOut.fromFile(5, "coin.txt");
         water = new Water(stock[0]);
         coffee = new Coffee(stock[1]);
         ionDrink = new IonDrink(stock[2]);
@@ -227,7 +227,6 @@ public class MainController{
     public void press1000Won(){
         paperMoney.setWon1000(paperMoney.getWon1000()+1);
         totalWon += paperMoney.Won1000();
-        taskStack.printAll();
         if(taskStack.search(1000)>=3){
             AppUtil.Alert("지폐를 3000원 초과하여 입력할 수 없습니다.", null);
             paperMoney.setWon1000(paperMoney.getWon1000()-1);
