@@ -77,10 +77,8 @@ public class SalesController {
         for(int i=0;i<sales.length;i++){
             series.getData().add(new XYChart.Data<>(monthNames[i],sales[i]));
         }
-
+        barChart.setLegendVisible(false);
         barChart.getData().add(series);
-
-
     }
 
 

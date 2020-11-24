@@ -49,4 +49,55 @@
     -fx-text-fill: #FFFF00;
 }
 
+.chart-plot-background{
+    -fx-background-color: #58FAF4;
+}
+
+.data0.chart-bar{
+    -fx-background-color: #FF0000;
+}
+
+.data1.chart-bar{
+    -fx-background-color: #FF4000;
+}
+
+.data2.chart-bar{
+    -fx-background-color: #FFBF00;
+}
+
+.data3.chart-bar{
+    -fx-background-color: #FFFF00;
+}
+
+.data4.chart-bar{
+    -fx-background-color: #00FF00;
+}
+
+.data5.chart-bar{
+    -fx-background-color: #01DFD7;
+}
+
+.data6.chart-bar{
+    -fx-background-color: #00BFFF;
+}
+
+.data7.chart-bar{
+    -fx-background-color: #0040FF;
+}
+
+.data8.chart-bar{
+    -fx-background-color: #4000FF;
+}
+
+.data9.chart-bar{
+    -fx-background-color: #BF00FF;
+}
+
+.data10.chart-bar{
+    -fx-background-color: #FF00FF;
+}
+
+.data11.chart-bar{
+    -fx-background-color: #FF0040;
+}
 
