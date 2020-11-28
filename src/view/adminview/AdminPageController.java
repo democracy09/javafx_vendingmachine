@@ -14,7 +14,7 @@ public class AdminPageController {
     @FXML private Button stockMenu;
     @FXML private Button coinMenu;
     @FXML private Button salesMenu;
-
+    @FXML private Button priceMenu;
 
     public void gotoPre(){
         try {
@@ -54,6 +54,17 @@ public class AdminPageController {
             Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Sales.fxml"));
             Scene scene = new Scene(root);
             Stage primaryStage = (Stage)salesMenu.getScene().getWindow();
+            primaryStage.setScene(scene);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void pressPrice(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Price.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage)priceMenu.getScene().getWindow();
             primaryStage.setScene(scene);
         }catch(Exception e){
             e.printStackTrace();

@@ -22,6 +22,7 @@ public class SalesController {
     private Button beforeBtn;
     @FXML private Button stockMenu;
     @FXML private Button coinMenu;
+    @FXML private Button priceMenu;
     @FXML private CategoryAxis xAxis;
     @FXML private BarChart barChart;
 
@@ -55,6 +56,17 @@ public class SalesController {
             Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Coin.fxml"));
             Scene scene = new Scene(root);
             Stage primaryStage = (Stage)coinMenu.getScene().getWindow();
+            primaryStage.setScene(scene);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void pressPrice(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Price.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage)priceMenu.getScene().getWindow();
             primaryStage.setScene(scene);
         }catch(Exception e){
             e.printStackTrace();

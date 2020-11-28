@@ -2,21 +2,22 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainpane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../mainstylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.adminview.StockController">
+<AnchorPane fx:id="mainpane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../mainstylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.adminview.PriceController">
     <children>
-        <AnchorPane fx:id="ap" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <AnchorPane fx:id="ap" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" stylesheets="@../mainstylesheet.css" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
             <children>
                 <Button fx:id="beforeBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#gotoPre" styleClass="btn" text="이전으로" AnchorPane.bottomAnchor="335.6" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
                 <VBox fx:id="mainmenu" layoutX="472.0" prefHeight="374.0" prefWidth="84.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="재고관리" />
+                        <Button fx:id="stockMenu" mnemonicParsing="false" onAction="#pressStock" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="재고관리" />
                         <Button fx:id="coinMenu" mnemonicParsing="false" onAction="#pressCoin" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="화폐현황" />
                         <Button fx:id="salesMenu" mnemonicParsing="false" onAction="#pressSales" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="월별 매츨" />
-                  <Button fx:id="priceMenu" mnemonicParsing="false" onAction="#pressPrice" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="가격 변경" />
+                        <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="가격 변경" />
                     </children>
                 </VBox>
                 <Label layoutX="80.0" layoutY="80.0" text="Water">
@@ -44,16 +45,17 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Label fx:id="water" layoutX="182.0" layoutY="84.0" text="Label" />
-                <Label fx:id="coffee" layoutX="183.0" layoutY="131.0" text="Label" />
-                <Label fx:id="ion" layoutX="183.0" layoutY="179.0" text="Label" />
-                <Label fx:id="fine" layoutX="184.0" layoutY="225.0" text="Label" />
-                <Label fx:id="soda" layoutX="184.0" layoutY="273.0" text="Label" />
-                <Button layoutX="253.0" layoutY="80.0" mnemonicParsing="false" onAction="#addWater" styleClass="btn" text="추가" />
-                <Button layoutX="253.0" layoutY="127.0" mnemonicParsing="false" onAction="#addCoffee" styleClass="btn" text="추가" />
-                <Button layoutX="253.0" layoutY="174.0" mnemonicParsing="false" onAction="#addIon" styleClass="btn" text="추가" />
-                <Button layoutX="253.0" layoutY="221.0" mnemonicParsing="false" onAction="#addFine" styleClass="btn" text="추가" />
-                <Button layoutX="253.0" layoutY="269.0" mnemonicParsing="false" onAction="#addSoda" styleClass="btn" text="추가" />
+            <TextField fx:id="waterTXT" layoutX="182.0" layoutY="80.0" prefHeight="22.0" prefWidth="77.0" />
+            <TextField fx:id="coffeeTXT" layoutX="182.0" layoutY="127.0" prefHeight="22.0" prefWidth="77.0" />
+            <TextField fx:id="fineTXT" layoutX="182.0" layoutY="221.0" prefHeight="22.0" prefWidth="77.0" />
+            <TextField fx:id="ionTXT" layoutX="182.0" layoutY="175.0" prefHeight="22.0" prefWidth="77.0" />
+            <TextField fx:id="sodaTXT" layoutX="182.0" layoutY="269.0" prefHeight="22.0" prefWidth="77.0" />
+            <Button layoutX="286.0" layoutY="80.0" mnemonicParsing="false" onAction="#prsWater" styleClass="btn" text="변경" />
+            <Button layoutX="286.0" layoutY="127.0" mnemonicParsing="false" onAction="#prsCoffee" styleClass="btn" text="변경" />
+            <Button layoutX="286.0" layoutY="175.0" mnemonicParsing="false" onAction="#prsIon" styleClass="btn" text="변경" />
+            <Button layoutX="286.0" layoutY="221.0" mnemonicParsing="false" onAction="#prsFine" prefHeight="24.0" prefWidth="42.0" styleClass="btn" text="변경" />
+            <Button layoutX="286.0" layoutY="269.0" mnemonicParsing="false" onAction="#prsSoda" styleClass="btn" text="변경" />
+
             </children>
         </AnchorPane>
     </children>

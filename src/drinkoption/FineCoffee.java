@@ -2,9 +2,10 @@ package drinkoption;
 
 public class FineCoffee extends Drink {
 
-    public FineCoffee(int quantity){
-        setPrice(700);
-        setQuantity(quantity);
+    public FineCoffee(int price, int quantity) {
+        super(price, quantity);
     }
 
+    public FineCoffee() {
+    }
 }

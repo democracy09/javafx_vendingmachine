@@ -11,6 +11,7 @@ import util.AppUtil;
 import util.FileInOut;
 
 import java.io.File;
+import java.time.LocalDate;
 
 public class CoinController {
 
@@ -19,6 +20,7 @@ public class CoinController {
     @FXML private Button beforeBtn;
     @FXML private Button stockMenu;
     @FXML private Button salesMenu;
+    @FXML private Button priceMenu;
     @FXML private Label won10;
     @FXML private Label won50;
     @FXML private Label won100;
@@ -52,6 +54,17 @@ public class CoinController {
             Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Sales.fxml"));
             Scene scene = new Scene(root);
             Stage primaryStage = (Stage)salesMenu.getScene().getWindow();
+            primaryStage.setScene(scene);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void pressPrice(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Price.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage)priceMenu.getScene().getWindow();
             primaryStage.setScene(scene);
         }catch(Exception e){
             e.printStackTrace();
@@ -93,6 +106,7 @@ public class CoinController {
                 +"\n1000원: "+ colCoin[4]+"개"+"\n\n총 "+total+"원",null);
 
         int[] temp = FileInOut.fromFile(12,"sales.txt");
+
         temp[0]+=total;
         FileInOut.toFile("sales.txt",temp);
     }

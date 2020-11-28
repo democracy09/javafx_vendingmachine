@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import moneyoption.Coin;
 import moneyoption.PaperMoney;
+import structure.MyQueue;
 import structure.MyStack;
 import util.AppUtil;
 import util.FileInOut;
@@ -18,15 +19,16 @@ import java.io.*;
 
 public class MainController{
 
-    private Water  water;
+    private Water water;
     private Coffee coffee;
     private IonDrink ionDrink;
     private Soda soda;
     private FineCoffee fineCoffee;
-    private Coin coin;
     private Coin machineCoin;
     private PaperMoney paperMoney;
     private MyStack<Integer> taskStack;
+    private MyQueue<Integer> salesQueue;
+    private int totalWon;
 
     @FXML
     private Button adminBtn;
@@ -42,23 +44,37 @@ public class MainController{
     private Label fineLabel;
     @FXML
     private Label total;
-
-    private int totalWon;
+    @FXML
+    private Label waterPrice;
+    @FXML
+    private Label coffeePrice;
+    @FXML
+    private Label ionPrice;
+    @FXML
+    private Label finePrice;
+    @FXML
+    private Label sodaPrice;
 
     @FXML
     private void initialize()
     {
         int[] stock = FileInOut.fromFile(5,"stock.txt");
         int[] coinStock = FileInOut.fromFile(5, "coin.txt");
-        water = new Water(stock[0]);
-        coffee = new Coffee(stock[1]);
-        ionDrink = new IonDrink(stock[2]);
-        fineCoffee = new FineCoffee(stock[3]);
-        soda = new Soda(stock[4]);
-        coin = new Coin();
-        paperMoney = new PaperMoney(coinStock[4]);
+        int[] price = FileInOut.fromFile(5,"price.txt");
+        water = new Water(price[0], stock[0]);
+        coffee = new Coffee(price[1], stock[1]);
+        ionDrink = new IonDrink(price[2], stock[2]);
+        fineCoffee = new FineCoffee(price[3], stock[3]);
+        soda = new Soda(price[4], stock[4]);
         machineCoin = new Coin(coinStock[0],coinStock[1],coinStock[2],coinStock[3]);
-        taskStack = new MyStack<Integer>();
+        paperMoney = new PaperMoney(coinStock[4]);
+        taskStack = new MyStack<>();
+
+        waterPrice.setText(water.getPrice()+"원");
+        coffeePrice.setText(coffee.getPrice()+"원");
+        ionPrice.setText(ionDrink.getPrice()+"원");
+        finePrice.setText(fineCoffee.getPrice()+"원");
+        sodaPrice.setText(soda.getPrice()+"원");
 
         waterLabel.setText(water.getQuantity()+"개");
         ionLabel.setText(ionDrink.getQuantity()+"개");
@@ -115,10 +131,8 @@ public class MainController{
             machineCoin.setWon500(machineCoin.getWon500()-change500);
             totalWon = totalChange;
             total.setText(totalWon+"원");
+            taskStack.push(-1);
         }
-
-
-
     }
 
     public void undo() {
@@ -126,26 +140,22 @@ public class MainController{
         try {
             undoWon = taskStack.peek();
 
-            if (undoWon == 10 && coin.getWon10() > 0) {
-                coin.setWon10(coin.getWon10() - 1);
+            if (undoWon == 10) {
                 machineCoin.setWon10(machineCoin.getWon10() - 1);
                 totalWon -= 10;
                 AppUtil.Alert("10원 취소", null);
                 taskStack.pop();
-            } else if (undoWon == 50 && coin.getWon50() > 0) {
-                coin.setWon50(coin.getWon50() - 1);
+            } else if (undoWon == 50) {
                 machineCoin.setWon50(machineCoin.Won50() - 1);
                 totalWon -= 50;
                 taskStack.pop();
                 AppUtil.Alert("50원 취소", null);
-            } else if (undoWon == 100 && coin.getWon100() > 0) {
-                coin.setWon100(coin.getWon100() - 1);
+            } else if (undoWon == 100) {
                 machineCoin.setWon100(machineCoin.getWon100() - 1);
                 totalWon -= 100;
                 taskStack.pop();
                 AppUtil.Alert("100원 취소", null);
-            } else if (undoWon == 500 && coin.getWon500() > 0) {
-                coin.setWon500(coin.getWon500() - 1);
+            } else if (undoWon == 500) {
                 machineCoin.setWon500(machineCoin.getWon500() - 1);
                 totalWon -= 500;
                 taskStack.pop();
@@ -156,9 +166,9 @@ public class MainController{
                 totalWon -= 1000;
                 taskStack.pop();
                 AppUtil.Alert("1000원 취소", null);
-            } else if (undoWon < 0) {
+            } else if (undoWon < -1) {
                 AppUtil.Alert("취소 불가 : 음료 구매", null);
-            }
+            } else if(undoWon==-1){throw new UnableToUndoException();}
         } catch (NullPointerException e) {
             AppUtil.Alert("입력된 금액이 없습니다.", null);
         }catch(UnableToUndoException e){
@@ -172,53 +182,49 @@ public class MainController{
     private class UnableToUndoException extends RuntimeException{}
 
     public void press10Won(){
-        totalWon += coin.Won10();
+        totalWon += machineCoin.Won10();
         if(totalWon>5000){
             AppUtil.Alert("5000원을 초과하여 입력할 수 없습니다.", "Notice");
             totalWon -= 10;
             return;
         }
-        coin.setWon10(coin.getWon10()+1);
         taskStack.push(10);
         machineCoin.setWon10(machineCoin.getWon10()+1);
         total.setText(totalWon+"원");
     }
 
     public void press50Won(){
-        totalWon += coin.Won50();
+        totalWon += machineCoin.Won50();
         if(totalWon>5000){
             AppUtil.Alert("5000원을 초과하여 입력할 수 없습니다.", "Notice");
 
             totalWon -= 50;
             return;
         }
-        coin.setWon50(coin.getWon50()+1);
         machineCoin.setWon50(machineCoin.getWon50()+1);
         taskStack.push(50);
         total.setText(totalWon+"원");
     }
 
     public void press100Won(){
-        totalWon += coin.Won100();
+        totalWon += machineCoin.Won100();
         if(totalWon>5000){
             AppUtil.Alert("5000원을 초과하여 입력할 수 없습니다.", "Notice");
             totalWon -= 100;
             return;
         }
-        coin.setWon100(coin.getWon100()+1);
         machineCoin.setWon100(machineCoin.getWon100()+1);
         taskStack.push(100);
         total.setText(totalWon+"원");
     }
 
     public void press500Won(){
-        totalWon += coin.Won500();
+        totalWon += machineCoin.Won500();
         if(totalWon>5000){
             AppUtil.Alert("5000원을 초과하여 입력할 수 없습니다.", "Notice");
             totalWon -= 500;
             return;
         }
-        coin.setWon500(coin.getWon500()+1);
         machineCoin.setWon500(machineCoin.getWon500()+1);
         taskStack.push(500);
         total.setText(totalWon+"원");
@@ -252,7 +258,7 @@ public class MainController{
             return;
         }else{
             totalWon-=water.getPrice();
-            taskStack.push(-450);
+            taskStack.push(-water.getPrice());
             water.setQuantity(water.getQuantity()-1);
             waterLabel.setText(water.getQuantity()+"개");
             total.setText(totalWon+"원");
@@ -269,7 +275,7 @@ public class MainController{
             return;
         }else{
             totalWon-=coffee.getPrice();
-            taskStack.push(-500);
+            taskStack.push(-coffee.getPrice());
             coffee.setQuantity(coffee.getQuantity()-1);
             coffeeLabel.setText(coffee.getQuantity()+"개");
             total.setText(totalWon+"원");
@@ -286,7 +292,7 @@ public class MainController{
             return;
         }else{
             totalWon-=ionDrink.getPrice();
-            taskStack.push(-550);
+            taskStack.push(-ionDrink.getPrice());
             ionDrink.setQuantity(ionDrink.getQuantity()-1);
             ionLabel.setText(ionDrink.getQuantity()+"개");
             total.setText(totalWon+"원");
@@ -303,7 +309,7 @@ public class MainController{
             return;
         }else{
             totalWon-=fineCoffee.getPrice();
-            taskStack.push(-700);
+            taskStack.push(-fineCoffee.getPrice());
             fineCoffee.setQuantity(fineCoffee.getQuantity()-1);
             fineLabel.setText(fineCoffee.getQuantity()+"개");
             total.setText(totalWon+"원");
@@ -320,7 +326,7 @@ public class MainController{
             return;
         }else{
             totalWon-=soda.getPrice();
-            taskStack.push(-750);
+            taskStack.push(-soda.getPrice());
             soda.setQuantity(soda.getQuantity()-1);
             sodaLabel.setText(soda.getQuantity()+"개");
             total.setText(totalWon+"원");

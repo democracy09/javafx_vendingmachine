@@ -25,8 +25,6 @@ public class Coin {
     public int Won100(){return 100;}
     public int Won500(){return 500;}
 
-
-
     public int getWon10() {
         return won10;
     }

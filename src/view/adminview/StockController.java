@@ -16,6 +16,7 @@ public class StockController {
     @FXML private Button coinMenu;
     @FXML private Button beforeBtn;
     @FXML private Button salesMenu;
+    @FXML private Button priceMenu;
     @FXML private Label water;
     @FXML private Label coffee;
     @FXML private Label ion;
@@ -49,6 +50,17 @@ public class StockController {
             Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Sales.fxml"));
             Scene scene = new Scene(root);
             Stage primaryStage = (Stage)salesMenu.getScene().getWindow();
+            primaryStage.setScene(scene);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void pressPrice(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/adminview/Price.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage)priceMenu.getScene().getWindow();
             primaryStage.setScene(scene);
         }catch(Exception e){
             e.printStackTrace();

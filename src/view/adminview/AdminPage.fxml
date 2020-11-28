@@ -14,6 +14,7 @@
                   <Button fx:id="stockMenu" mnemonicParsing="false" onAction="#pressStock" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="재고관리" />
                   <Button fx:id="coinMenu" mnemonicParsing="false" onAction="#pressCoin" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="화폐현황" />
                   <Button fx:id="salesMenu" mnemonicParsing="false" onAction="#pressSales" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="월별 매츨" />
+                  <Button fx:id="priceMenu" mnemonicParsing="false" onAction="#pressPrice" prefHeight="85.0" prefWidth="134.0" styleClass="menubtn" text="가격 변경" />
                </children>
             </VBox>
          </children>
